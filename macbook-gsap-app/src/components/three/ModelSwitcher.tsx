@@ -1,33 +1,42 @@
-import { useRef} from "react";
-import {PresentationControls} from "@react-three/drei";
+import { useRef } from "react";
+import { PresentationControls } from "@react-three/drei";
 import gsap from 'gsap';
+import { Group, Mesh, MeshStandardMaterial } from "three";
+import type { ModelSwitcherProps } from "../../types/MacBookStoreData";
 
 import MacbookModel16 from "../models/Macbook-16.jsx";
 import MacbookModel14 from "../models/Macbook-14.jsx";
-import {useGSAP} from "@gsap/react";
+import { useGSAP } from "@gsap/react";
+
 const ANIMATION_DURATION = 1;
 const OFFSET_DISTANCE = 5;
 
-{/* @ts-expect-error PresentationControls types often conflict with current React versions */}
-const fadeMeshes = (group, opacity) => {
-    if(!group) return;
 
-    {/* @ts-expect-error PresentationControls types often conflict with current React versions */}
+const fadeMeshes = (group: Group | null, opacity: number) => {
+    if (!group) return;
+
     group.traverse((child) => {
-        if(child.isMesh) {
-            child.material.transparent = true;
-            gsap.to(child.material, { opacity, duration: ANIMATION_DURATION })
+        if ((child as Mesh).isMesh) {
+            const mesh = child as Mesh;
+            const materials = Array.isArray(mesh.material)
+                ? mesh.material
+                : [mesh.material];
+
+            materials.forEach((mat) => {
+                (mat as MeshStandardMaterial).transparent = true;
+                gsap.to(mat, { opacity, duration: ANIMATION_DURATION })
+            });
         }
     })
 }
-{/* @ts-expect-error PresentationControls types often conflict with current React versions */}
-const moveGroup = (group, x) => {
-    if(!group) return;
+
+const moveGroup = (group: Group | null, x: number) => {
+    if (!group) return;
 
     gsap.to(group.position, { x, duration: ANIMATION_DURATION })
 }
-{/* @ts-expect-error PresentationControls types often conflict with current React versions */}
-const ModelSwitcher = ({ scale, isMobile }) => {
+
+const ModelSwitcher = ({ scale, isMobile }: ModelSwitcherProps) => {
     const SCALE_LARGE_DESKTOP = 0.08;
     const SCALE_LARGE_MOBILE = 0.05;
 
@@ -37,7 +46,7 @@ const ModelSwitcher = ({ scale, isMobile }) => {
     const showLargeMacbook = scale === SCALE_LARGE_DESKTOP || scale === SCALE_LARGE_MOBILE;
 
     useGSAP(() => {
-        if(showLargeMacbook) {
+        if (showLargeMacbook) {
             moveGroup(smallMacbookRef.current, -OFFSET_DISTANCE);
             moveGroup(largeMacbookRef.current, 0);
 
@@ -58,7 +67,7 @@ const ModelSwitcher = ({ scale, isMobile }) => {
         zoom: 1,
         //polar: [-Math.PI, Math.PI],
         azimuth: [-Infinity, Infinity],
-        config: {mass:1, tension: 0, friction: 26}
+        config: { mass: 1, tension: 0, friction: 26 }
     }
 
     return (

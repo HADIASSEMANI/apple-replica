@@ -2,7 +2,6 @@ import { useRef } from "react";
 import { PresentationControls } from "@react-three/drei";
 import gsap from 'gsap';
 import { Group, Mesh, MeshStandardMaterial } from "three";
-import type { ModelSwitcherProps } from "../../types/MacBookStoreData";
 
 import MacbookModel16 from "../models/Macbook-16.jsx";
 import MacbookModel14 from "../models/Macbook-14.jsx";
@@ -36,7 +35,7 @@ const moveGroup = (group: Group | null, x: number) => {
     gsap.to(group.position, { x, duration: ANIMATION_DURATION })
 }
 
-const ModelSwitcher = ({ scale, isMobile }: ModelSwitcherProps) => {
+const ModelSwitcher = ({ scale, isMobile }: { scale: number; isMobile: boolean }) => {
     const SCALE_LARGE_DESKTOP = 0.08;
     const SCALE_LARGE_MOBILE = 0.05;
 
@@ -65,21 +64,21 @@ const ModelSwitcher = ({ scale, isMobile }: ModelSwitcherProps) => {
         snap: true,
         speed: 1,
         zoom: 1,
-        //polar: [-Math.PI, Math.PI],
-        azimuth: [-Infinity, Infinity],
+        polar: [-Math.PI, Math.PI] as [number, number],
+        azimuth: [-Infinity, Infinity] as [number, number],
         config: { mass: 1, tension: 0, friction: 26 }
     }
 
     return (
         <>
-            {/* @ts-expect-error PresentationControls types often conflict with current React versions */}
             <PresentationControls {...controlsConfig}>
                 <group ref={largeMacbookRef}>
                     <MacbookModel16 scale={isMobile ? 0.05 : 0.08} />
                 </group>
             </PresentationControls>
 
-            {/* @ts-expect-error PresentationControls types often conflict with current React versions */}
+            <h1></h1>
+
             <PresentationControls {...controlsConfig}>
                 <group ref={smallMacbookRef}>
                     <MacbookModel14 scale={isMobile ? 0.03 : 0.06} />

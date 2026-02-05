@@ -2,6 +2,7 @@ import * as React from "react";
 import NavBar from "./components/NavBar.tsx";
 import Hero from "./components/Hero.tsx";
 import ProductViewer from "./components/ProductViewer.tsx";
+import Showcase from "./components/Showcase.tsx";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
 
@@ -13,6 +14,7 @@ const App: React.FC = () => {
             <NavBar />
             <Hero />
             <ProductViewer />
+            <Showcase />
         </main>
     )
 }

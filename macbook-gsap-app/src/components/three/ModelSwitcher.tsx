@@ -11,7 +11,7 @@ const ANIMATION_DURATION = 1;
 const OFFSET_DISTANCE = 5;
 
 
-const fadeMeshes = (group: Group | null, opacity: number) => {
+const fadeMeshes = (group: Group | null, opacity: number, duration: number = ANIMATION_DURATION) => {
     if (!group) return;
 
     group.traverse((child) => {
@@ -23,16 +23,16 @@ const fadeMeshes = (group: Group | null, opacity: number) => {
 
             materials.forEach((mat) => {
                 (mat as MeshStandardMaterial).transparent = true;
-                gsap.to(mat, { opacity, duration: ANIMATION_DURATION })
+                gsap.to(mat, { opacity, duration })
             });
         }
     })
 }
 
-const moveGroup = (group: Group | null, x: number) => {
+const moveGroup = (group: Group | null, x: number, duration: number = ANIMATION_DURATION) => {
     if (!group) return;
 
-    gsap.to(group.position, { x, duration: ANIMATION_DURATION })
+    gsap.to(group.position, { x, duration })
 }
 
 const ModelSwitcher = ({ scale, isMobile }: { scale: number; isMobile: boolean }) => {
@@ -43,6 +43,22 @@ const ModelSwitcher = ({ scale, isMobile }: { scale: number; isMobile: boolean }
     const largeMacbookRef = useRef(null);
 
     const showLargeMacbook = scale === SCALE_LARGE_DESKTOP || scale === SCALE_LARGE_MOBILE;
+
+    useGSAP(() => {
+        if (showLargeMacbook) {
+            moveGroup(smallMacbookRef.current, -OFFSET_DISTANCE, 0);
+            moveGroup(largeMacbookRef.current, 0, 0);
+
+            fadeMeshes(smallMacbookRef.current, 0, 0);
+            fadeMeshes(largeMacbookRef.current, 1, 0);
+        } else {
+            moveGroup(smallMacbookRef.current, 0, 0);
+            moveGroup(largeMacbookRef.current, OFFSET_DISTANCE, 0);
+
+            fadeMeshes(smallMacbookRef.current, 1, 0);
+            fadeMeshes(largeMacbookRef.current, 0, 0);
+        }
+    }, [])
 
     useGSAP(() => {
         if (showLargeMacbook) {

@@ -22,8 +22,7 @@ const Showcase: React.FC = () => {
                 .to('.mask img', {
                     transform: 'scale(1.0)'
                 }).to('.content', { opacity: 1, y: 0, ease: 'power1.inOut' });
-        };
-
+        }
 
     }, [isMobile])
     return (
@@ -31,8 +30,7 @@ const Showcase: React.FC = () => {
             <div className="media">
                 <video className="overflow-y-hidden" src="/videos/game.mp4" autoPlay loop muted playsInline preload="auto" />
                 <div className="mask max-h-1080px">
-                    <img src="/mask-logo.svg" />
-                </div>
+                    <img src="/mask-logo.svg" alt="M5 chip logo mask" />                </div>
             </div>
 
             <div className="content">
@@ -66,7 +64,7 @@ const Showcase: React.FC = () => {
                     </div>
                 </div>
             </div>
-        </section >
+        </section>
     )
 }
 export default Showcase

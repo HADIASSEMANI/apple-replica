@@ -17,7 +17,7 @@ const Highlights: React.FC = () => {
             duration: 1,
             ease: 'power1.inOut'
         });
-    })
+    }, [isMobile]);
 
     return (
         <section id="highlights">

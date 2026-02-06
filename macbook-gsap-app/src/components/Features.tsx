@@ -47,7 +47,7 @@ const ModelScroll: React.FC = () => {
                     ease: 'power2.inOut'
                 }, '<')
                 .call(() => setTexture('/videos/feature-2.mp4'))
-                .to('.box2', { opacity: 1, y: 0, duration: 1 })
+                .to('.box2', { opacity: 1, y: 0, duration: 1.5 })
 
                 .call(() => setTexture('/videos/feature-3.mp4'))
                 .to('.box3', { opacity: 1, y: 0, duration: 1 })
@@ -86,7 +86,7 @@ const Features = () => {
                     <div key={feature.id} className={clsx('box', `box${index + 1}`, feature.styles)}>
                         <img src={feature.icon} alt={feature.highlight} />
                         <p>
-                            <span className="text-white">{feature.highlight}</span>
+                            <span className="text-white">{feature.highlight}</span>{" "}
                             {feature.text}
                         </p>
                     </div>

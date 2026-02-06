@@ -8,10 +8,14 @@ Source: https://sketchfab.com/3d-models/macbook-pro-m3-16-inch-2024-8e34fc2b3031
 Title: macbook pro M3 16 inch 2024
 */
 
+
 import * as THREE from 'three';
-import { useGLTF, useTexture } from '@react-three/drei';
-import type {GLTF} from 'three-stdlib';
-import type {JSX} from "react";
+import { type JSX, useEffect, useMemo } from 'react';
+import type { GLTF } from 'three-stdlib';
+import { useGLTF, useVideoTexture } from '@react-three/drei';
+
+import useMacbookStore from "../store";
+import { noChangeParts, featureSequence } from "../../constants";
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -59,9 +63,48 @@ type GLTFResult = GLTF & {
 }
 
 export default function MacbookModel(props: JSX.IntrinsicElements['group']) {
-  const { nodes, materials } = useGLTF('/models/macbook-transformed.glb') as unknown as GLTFResult;
+  const { color, texture } = useMacbookStore();
+  const { nodes, materials, scene } = useGLTF('/models/macbook-transformed.glb') as unknown as GLTFResult;
 
-  const texture = useTexture('/screen.png');
+  const screen = useVideoTexture(featureSequence[0].videoPath); // Fallback or current
+  const tex1 = useVideoTexture(featureSequence[0].videoPath);
+  const tex2 = useVideoTexture(featureSequence[1].videoPath);
+  const tex3 = useVideoTexture(featureSequence[2].videoPath);
+  const tex4 = useVideoTexture(featureSequence[3].videoPath);
+  const tex5 = useVideoTexture(featureSequence[4].videoPath);
+
+  const textures = useMemo(() => ({
+    [featureSequence[0].videoPath]: tex1,
+    [featureSequence[1].videoPath]: tex2,
+    [featureSequence[2].videoPath]: tex3,
+    [featureSequence[3].videoPath]: tex4,
+    [featureSequence[4].videoPath]: tex5,
+  }), [tex1, tex2, tex3, tex4, tex5]);
+
+  const activeTexture = textures[texture] || screen;
+
+  useEffect(() => {
+    Object.values(textures).forEach((tex) => {
+      if (tex && tex.image) {
+        tex.image.pause();
+        tex.image.muted = true;
+      }
+    });
+
+    if (activeTexture && activeTexture.image) {
+      activeTexture.image.play().catch((e) => console.warn("Video play failed", e));
+    }
+  }, [texture, activeTexture, textures]);
+
+  useEffect(() => {
+    scene.traverse((child) => {
+      if ((child as THREE.Mesh).isMesh) {
+        if (!noChangeParts.includes(child.name)) {
+          (((child as THREE.Mesh).material) as THREE.MeshStandardMaterial).color.set(color);
+        }
+      }
+    });
+  }, [color, scene]);
 
   return (
     <group {...props} dispose={null}>
@@ -83,7 +126,7 @@ export default function MacbookModel(props: JSX.IntrinsicElements['group']) {
       <mesh geometry={nodes.Object_96.geometry} material={materials.PaletteMaterial003} rotation={[Math.PI / 2, 0, 0]} />
       <mesh geometry={nodes.Object_107.geometry} material={materials.JvMFZolVCdpPqjj} rotation={[Math.PI / 2, 0, 0]} />
       <mesh geometry={nodes.Object_123.geometry} material={materials.sfCQkHOWyrsLmor} rotation={[Math.PI / 2, 0, 0]}>
-          <meshBasicMaterial map={texture} />
+        <meshBasicMaterial map={activeTexture} />
       </mesh>
       <mesh geometry={nodes.Object_127.geometry} material={materials.ZCDwChwkbBfITSW} rotation={[Math.PI / 2, 0, 0]} />
     </group>

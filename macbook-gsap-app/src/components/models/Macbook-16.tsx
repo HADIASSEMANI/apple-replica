@@ -9,14 +9,12 @@ Title: macbook pro M3 16 inch 2024
 */
 
 import * as THREE from 'three';
-import {useGLTF, useTexture} from '@react-three/drei';
-import type { JSX } from 'react';
-import type {GLTF} from 'three-stdlib';
-import {useEffect} from "react";
+import { type JSX, useEffect } from 'react';
+import type { GLTF } from 'three-stdlib';
+import { useGLTF, useTexture } from '@react-three/drei';
 
 import useMacbookStore from "../store";
-import {noChangeParts} from "../../constants";
-import {type Mesh, Color} from "three";
+import { noChangeParts } from "../../constants";
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -64,21 +62,20 @@ type GLTFResult = GLTF & {
 }
 
 export default function MacbookModel16(props: JSX.IntrinsicElements['group']) {
-    const { color } = useMacbookStore();
-    const {nodes, materials, scene} = useGLTF('/models/macbook-16-transformed.glb') as unknown as GLTFResult;
+  const { color } = useMacbookStore();
+  const { nodes, materials, scene } = useGLTF('/models/macbook-16-transformed.glb') as unknown as GLTFResult;
 
-    const texture = useTexture('/screen.png');
+  const texture = useTexture('/screen.png');
 
-    useEffect(() => {
-        scene.traverse((child) => {
-            if((child as Mesh).isMesh) {
-                if(!noChangeParts.includes(child.name)) {
-                    {/* @ts-expect-error PresentationControls types often conflict with current React versions */}
-                    (child as Mesh).material.color = new Color(color);
-                }
-            }
-        })
-    }, [color, scene])
+  useEffect(() => {
+    scene.traverse((child) => {
+      if ((child as THREE.Mesh).isMesh) {
+        if (!noChangeParts.includes(child.name)) {
+          (((child as THREE.Mesh).material) as THREE.MeshStandardMaterial).color.set(color);
+        }
+      }
+    });
+  }, [color, scene]);
 
   return (
     <group {...props} dispose={null}>
@@ -100,7 +97,7 @@ export default function MacbookModel16(props: JSX.IntrinsicElements['group']) {
       <mesh geometry={nodes.Object_96.geometry} material={materials.PaletteMaterial003} rotation={[Math.PI / 2, 0, 0]} />
       <mesh geometry={nodes.Object_107.geometry} material={materials.JvMFZolVCdpPqjj} rotation={[Math.PI / 2, 0, 0]} />
       <mesh geometry={nodes.Object_123.geometry} material={materials.sfCQkHOWyrsLmor} rotation={[Math.PI / 2, 0, 0]}>
-          <meshBasicMaterial map={texture} />
+        <meshBasicMaterial map={texture} />
       </mesh>
       <mesh geometry={nodes.Object_127.geometry} material={materials.ZCDwChwkbBfITSW} rotation={[Math.PI / 2, 0, 0]} />
     </group>

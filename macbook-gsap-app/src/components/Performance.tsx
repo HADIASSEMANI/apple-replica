@@ -9,14 +9,18 @@ const Performance: React.FC = () => {
     const sectionRef = useRef<HTMLElement>(null);
 
     useGSAP(() => {
+
+        if (!sectionRef.current) return;
+        const q = gsap.utils.selector(sectionRef.current);
+
         // Text animation: fade in and move up
-        gsap.to('.content p', {
+        gsap.to(q('.content p'), {
             opacity: 1,
             y: 0,
             duration: 1,
             ease: "power2.out",
             scrollTrigger: {
-                trigger: '.content',
+                trigger: q('.content'),
                 start: 'top 90%',
                 toggleActions: 'play none none reverse'
             }
@@ -42,7 +46,7 @@ const Performance: React.FC = () => {
         performanceImgPositions.forEach((pos) => {
             if (pos.id === 'p5') return;
 
-            const target = `.${pos.id}`;
+            const target = q(`.${pos.id}`);
             const vars: gsap.TweenVars = {};
 
             if (pos.left !== undefined) vars.left = `${pos.left}%`;
@@ -58,10 +62,9 @@ const Performance: React.FC = () => {
             <h2 className="section-highlight">Next-level graphics performance. Game On.</h2>
 
             <div className="wrapper">
-                {performanceImages.map(({ id, src }) => (
-                    <img key={id} src={src} alt={id} className={id} />
-                ))}
-            </div>
+                {performanceImages.map(({ id, src, alt }) => (
+                    <img key={id} src={src} alt={alt} className={id} />
+                ))}            </div>
 
             <div className="content">
                 <p>

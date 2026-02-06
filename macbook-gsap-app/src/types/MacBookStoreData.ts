@@ -5,4 +5,5 @@ export interface MacBookStoreData {
   setColor: (color: string) => void;
   setScale: (scale: number) => void;
   setTexture: (texture: string) => void;
+  reset: () => void;
 }

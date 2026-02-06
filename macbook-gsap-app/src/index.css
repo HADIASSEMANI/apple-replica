@@ -184,17 +184,17 @@ body {
     @apply relative;
 
     .media {
-      @apply relative lg:overflow-hidden;
+      @apply relative overflow-hidden;
 
       video {
-        @apply w-full object-cover object-center;
+        @apply w-full overflow-hidden object-center;
       }
 
       .mask {
-        @apply absolute h-full top-0 lg:-top-20 xl:top-0;
+        @apply absolute w-full top-0 lg:top-0 xl:top-0;
 
         img {
-          @apply h-full scale-150 lg:scale-100;
+          @apply w-full scale-150 md:scale-100 lg:scale-100;
           transform: matrix(80, 0, 0, 80, 0, 0);
         }
 
@@ -281,21 +281,11 @@ body {
       }
 
       @media (max-width: 1024px) {
-        .p1 {
-          @apply opacity-0;
-        }
-        .p2 {
-          @apply opacity-0;
-        }
-        .p3 {
-          @apply opacity-0;
-        }
-        .p4 {
-          @apply opacity-0;
-        }
-        .p6 {
-          @apply opacity-0;
-        }
+        .p1,
+        .p2,
+        .p3,
+        .p4,
+        .p6,
         .p7 {
           @apply opacity-0;
         }

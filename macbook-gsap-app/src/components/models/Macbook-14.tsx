@@ -73,7 +73,13 @@ export default function MacbookModel14(props: JSX.IntrinsicElements["group"]) {
     scene.traverse((child) => {
       if ((child as THREE.Mesh).isMesh) {
         if (!noChangeParts.includes(child.name)) {
-          (((child as THREE.Mesh).material) as THREE.MeshStandardMaterial).color.set(color);
+          const mesh = child as THREE.Mesh;
+          const materials = Array.isArray(mesh.material) ? mesh.material : [mesh.material];
+          materials.forEach((mat) => {
+            if ((mat as THREE.MeshStandardMaterial).color) {
+              (mat as THREE.MeshStandardMaterial).color.set(color);
+            }
+          });
         }
       }
     });

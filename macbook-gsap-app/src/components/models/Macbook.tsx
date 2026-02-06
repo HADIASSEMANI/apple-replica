@@ -66,12 +66,11 @@ export default function MacbookModel(props: JSX.IntrinsicElements['group']) {
   const { color, texture } = useMacbookStore();
   const { nodes, materials, scene } = useGLTF('/models/macbook-transformed.glb') as unknown as GLTFResult;
 
-  const screen = useVideoTexture(featureSequence[0].videoPath); // Fallback or current
-  const tex1 = useVideoTexture(featureSequence[0].videoPath);
-  const tex2 = useVideoTexture(featureSequence[1].videoPath);
-  const tex3 = useVideoTexture(featureSequence[2].videoPath);
-  const tex4 = useVideoTexture(featureSequence[3].videoPath);
-  const tex5 = useVideoTexture(featureSequence[4].videoPath);
+  const tex1 = useVideoTexture(featureSequence[0]?.videoPath ?? '');
+  const tex2 = useVideoTexture(featureSequence[1]?.videoPath ?? '');
+  const tex3 = useVideoTexture(featureSequence[2]?.videoPath ?? '');
+  const tex4 = useVideoTexture(featureSequence[3]?.videoPath ?? '');
+  const tex5 = useVideoTexture(featureSequence[4]?.videoPath ?? '');
 
   const textures = useMemo(() => ({
     [featureSequence[0].videoPath]: tex1,

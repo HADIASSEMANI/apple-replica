@@ -20,8 +20,8 @@ const Showcase: React.FC = () => {
             });
             timeLine
                 .to('.mask img', {
-                    transform: 'scale(1.1)'
-                }).to('.content', { opacity: 1, y: 0, ease: 'power1.in' });
+                    transform: 'scale(1.0)'
+                }).to('.content', { opacity: 1, y: 0, ease: 'power1.inOut' });
         };
 
 
@@ -29,8 +29,8 @@ const Showcase: React.FC = () => {
     return (
         <section id="showcase">
             <div className="media">
-                <video src="/videos/game.mp4" autoPlay loop muted playsInline />
-                <div className="mask">
+                <video className="overflow-y-hidden" src="/videos/game.mp4" autoPlay loop muted playsInline />
+                <div className="mask max-h-1080px">
                     <img src="/mask-logo.svg" />
                 </div>
             </div>

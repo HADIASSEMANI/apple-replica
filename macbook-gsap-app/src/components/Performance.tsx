@@ -59,7 +59,7 @@ const Performance: React.FC = () => {
 
     return (
         <section id="performance" ref={sectionRef}>
-            <h2 className="section-highlight">Next-level graphics performance. Game On.</h2>
+            <h2 className="text-white">Next-level graphics performance. Game On.</h2>
 
             <div className="wrapper">
                 {performanceImages.map(({ id, src, alt }) => (

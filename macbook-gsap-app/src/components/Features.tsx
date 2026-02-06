@@ -22,7 +22,7 @@ const ModelScroll: React.FC = () => {
             scrollTrigger: {
                 trigger: '#f-canvas',
                 start: 'top top',
-                end: '+=6000',
+                end: '+=8000',
                 scrub: true,
                 pin: true,
             }
@@ -73,7 +73,7 @@ const ModelScroll: React.FC = () => {
 const Features = () => {
     return (
         <section id="features">
-            <h2 className="section-highlight">See it all in a new light.</h2>
+            <h2 className="text-white">See it all in a new light.</h2>
 
             <Canvas id="f-canvas">
                 <StudioLights />

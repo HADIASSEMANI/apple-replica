@@ -14,7 +14,7 @@ import { type JSX, useEffect, useMemo } from 'react';
 import type { GLTF } from 'three-stdlib';
 import { useGLTF, useVideoTexture } from '@react-three/drei';
 
-import useMacbookStore from "../store";
+import { useMacbookStore } from "../store";
 import { noChangeParts, featureSequence } from "../../constants";
 
 type GLTFResult = GLTF & {

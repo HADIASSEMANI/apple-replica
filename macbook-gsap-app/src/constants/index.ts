@@ -78,7 +78,8 @@ const performanceImgPositions: {
   },
 ];
 
-const features = [
+{
+  /*const features = [
   {
     id: 1,
     icon: "/feature-icon1.svg",
@@ -115,6 +116,8 @@ const features = [
     styles: "left-5 md:left-20 top-[90%] opacity-0 translate-y-5",
   },
 ];
+*/
+}
 
 const featureSequence = [
   { videoPath: "/videos/feature-1.mp4", boxClass: ".box1", delay: 1 },
@@ -133,7 +136,7 @@ const footerLinks = [
 ];
 
 export {
-  features,
+  //features,
   featureSequence,
   footerLinks,
   navLinks,

@@ -1,11 +1,13 @@
 import { useRef } from "react";
-import { PresentationControls } from "@react-three/drei";
 import gsap from 'gsap';
+import { useGSAP } from "@gsap/react";
 import { Group, Mesh, MeshStandardMaterial } from "three";
+import { PresentationControls } from "@react-three/drei";
 
 import MacbookModel16 from "../models/Macbook-16.jsx";
 import MacbookModel14 from "../models/Macbook-14.jsx";
-import { useGSAP } from "@gsap/react";
+import type { ModelSwitcherProps } from "../../types/MacBookStoreData.ts";
+
 
 const ANIMATION_DURATION = 1;
 const OFFSET_DISTANCE = 5;
@@ -35,7 +37,7 @@ const moveGroup = (group: Group | null, x: number, duration: number = ANIMATION_
     gsap.to(group.position, { x, duration })
 }
 
-const ModelSwitcher = ({ scale, isMobile }: { scale: number; isMobile: boolean }) => {
+const ModelSwitcher = ({ scale, isMobile }: ModelSwitcherProps) => {
     const SCALE_LARGE_DESKTOP = 0.08;
     const SCALE_LARGE_MOBILE = 0.05;
 

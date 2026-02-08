@@ -4,7 +4,7 @@ const Hero: React.FC = () => {
     const videoRef = useRef<HTMLVideoElement | null>(null);
 
     useEffect(() => {
-        if(videoRef.current) videoRef.current.playbackRate = 2;
+        if (videoRef.current) videoRef.current.playbackRate = 1.5;
     })
 
     return (

@@ -1,5 +1,9 @@
+import type { Group } from "three";
 import { create } from "zustand";
-import type { MacBookStoreData } from "../../types/MacBookStoreData.ts";
+import type {
+  MacBookStoreData,
+  FeatureScrollStoreData,
+} from "../../types/MacBookStoreData.ts";
 
 const useMacbookStore = create<MacBookStoreData>((set) => ({
   color: "#adb5bd",
@@ -15,4 +19,11 @@ const useMacbookStore = create<MacBookStoreData>((set) => ({
     set({ color: "#adb5bd", scale: 0.08, texture: "/videos/feature-1.mp4" }),
 }));
 
-export default useMacbookStore;
+const useFeatureScrollStore = create<FeatureScrollStoreData>((set) => ({
+  featureRef: null,
+  setFeatureRef: (ref: React.RefObject<Group | null>) =>
+    set({ featureRef: ref }),
+  reset: () => set({ featureRef: null }),
+}));
+
+export { useMacbookStore, useFeatureScrollStore };

@@ -13,7 +13,7 @@ import { type JSX, useEffect } from 'react';
 import type { GLTF } from 'three-stdlib';
 import { useGLTF, useTexture } from '@react-three/drei';
 
-import useMacbookStore from "../store";
+import { useMacbookStore } from "../store";
 import { noChangeParts } from "../../constants";
 
 type GLTFResult = GLTF & {

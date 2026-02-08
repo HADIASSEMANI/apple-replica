@@ -1,7 +1,6 @@
-import React from 'react';
-import {Environment, Lightformer, SpotLight} from "@react-three/drei";
+import { Environment, Lightformer, SpotLight } from "@react-three/drei";
 
-const StudioLights: React.FC = () => {
+const StudioLights = () => {
     return (
         <group name="Lights">
             <Environment>

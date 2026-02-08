@@ -334,21 +334,6 @@ body {
         @apply lg:h3-semibold base-semibold;
       }
     }
-
-    .section-highlight {
-      background: rgb(245, 245, 247);
-      background-clip: text;
-      -webkit-text-fill-color: rgba(0, 0, 0, 0);
-      -webkit-box-decoration-break: clone;
-      box-decoration-break: clone;
-      background-image: linear-gradient(
-        90deg,
-        #e4f6f0,
-        #9dcfca 31%,
-        #6b95ac 68%,
-        #45657d
-      );
-    }
   }
 
   #highlights {

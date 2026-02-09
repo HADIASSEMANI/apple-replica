@@ -42,7 +42,6 @@ const ProductViewer: React.FC = () => {
 
             <Canvas id="canvas" camera={{ position: [0, 2, 5], fov: 60, near: 0.1, far: 100 }}>
                 <StudioLights />
-
                 <ModelSwitcher scale={isMobile ? scale - 0.03 : scale} isMobile={isMobile} />
             </Canvas>
         </section>

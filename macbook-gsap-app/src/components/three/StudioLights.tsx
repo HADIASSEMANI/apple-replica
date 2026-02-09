@@ -1,4 +1,4 @@
-import { Environment, Lightformer, SpotLight } from "@react-three/drei";
+import { Environment, Lightformer } from "@react-three/drei";
 
 const StudioLights = () => {
     return (
@@ -23,25 +23,25 @@ const StudioLights = () => {
                 </group>
             </Environment>
 
-            <SpotLight
+            <spotLight
                 position={[-2, 10, 5]}
-                angle={0.15}
+                angle={1.15}
                 decay={0}
                 intensity={Math.PI * 0.2}
             />
 
-            <SpotLight
+            <spotLight
                 position={[0, -25, 10]}
                 angle={0.15}
-                decay={0}
-                intensity={Math.PI * 0.2}
+                decay={0.1}
+                intensity={Math.PI * 0.1}
             />
 
-            <SpotLight
+            <spotLight
                 position={[0, 15, 5]}
-                angle={0.15}
-                decay={0.1}
-                intensity={Math.PI}
+                angle={0.3}
+                decay={0.25}
+                intensity={Math.PI * 0.5}
             />
 
         </group>

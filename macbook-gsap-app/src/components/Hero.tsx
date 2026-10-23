@@ -11,7 +11,7 @@ const Hero: React.FC = () => {
         <section id="hero">
             <div>
                 <h1>MacBook Pro</h1>
-                <img src="/title.png" alt="MacBook Title" />
+                <img src="/title.webp" alt="MacBook Title" />
             </div>
 
             <video ref={videoRef} src="/videos/hero.mp4" autoPlay muted playsInline />
